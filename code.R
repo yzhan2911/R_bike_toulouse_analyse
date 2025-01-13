@@ -1,5 +1,5 @@
 library(tidyverse)
-install.packages("dplyr")
+#install.packages("dplyr")
 
 
 bikesInfosTwoWeeks = read.csv("bikes_two_weeks.csv", header = TRUE, sep = ",")
@@ -138,7 +138,7 @@ names(stations_info)
 names(bikesInfosTwoWeeks)
 
 # le nombre moyen de vélos disponibles par heure pour chaque jour
-avg_bikes_day_hour <- bikesWeekNoel %>%  ##bikesWeekNoel sinon
+avg_bikes_day_hour <- bikesWeekNonNoel %>%  ## et bikesWeekNoel pour la semaine noel
   group_by(day, hour) %>%
   summarise(mean_bikes = mean(available_bikes, na.rm = TRUE), .groups = "drop") %>%
   mutate(day = factor(day, levels = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")))
@@ -148,7 +148,7 @@ ggplot(avg_bikes_day_hour, aes(x = as.numeric(hour), y = mean_bikes, group = day
   geom_line(color = "blue", linewidth = 1.5) +
   geom_point(size = 3, color = "red") +
   labs(
-    title = paste("Hourly Evolution of Available Bikes for Chrismas week by Day for Station", station_number),
+    title = "Hourly Evolution of Available Bikes for not Chrismas week by Day for Station",
     x = "Hour of the Day",
     y = "Mean Available Bikes"
   ) +
